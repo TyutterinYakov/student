@@ -4,14 +4,21 @@ import java.time.LocalDate;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import student.util.LocalDateAdapter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import student.util.LocalDateStringConverter;
+import student.util.StringLocalDateConverter;
+
 
 
 public class StudentResponse {
 	private String documentNumber;
-	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	@JsonSerialize(converter = LocalDateStringConverter.class)
+	@JsonDeserialize(converter = StringLocalDateConverter.class)
 	private LocalDate documentDate;
-	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	@JsonSerialize(converter = LocalDateStringConverter.class)
+	@JsonDeserialize(converter = StringLocalDateConverter.class)
 	private LocalDate expiredDate;
 	private String facultyName;
 	private String universityName;

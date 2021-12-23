@@ -5,8 +5,12 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -23,7 +27,9 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 
-	public List<StudentResponse> getStudentInfo(StudentRequest request) {
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<StudentResponse> getStudentInfo(@RequestBody StudentRequest request) {
 		
 		return studentService.getStudentInfo(request);
 	}
